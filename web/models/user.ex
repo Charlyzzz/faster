@@ -16,5 +16,6 @@ defmodule Faster.User do
     |> cast(params, [:username, :password])
     |> validate_required([:username, :password])
     |> unique_constraint(:username)
+    |> validate_length(:username, min: 2, max: 20)
   end
 end
