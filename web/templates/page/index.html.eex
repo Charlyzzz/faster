@@ -1,6 +1,9 @@
-<div class="jumbotron">
+<div class="jumbotron" id="jumbotron">
   <h2><%= gettext "Welcome to %{name}", name: "Faster!" %></h2>
-  <p class="lead">A blazing-fast chat client which<br />does not compromise speed and maintainability.</p>
+  <p class="lead">A blazing-fast chat client made with Phoenix<br />Log in to start chatting right away.</p>
+  <button class="btn btn-primary btn-lg", id="login">Login</button>
+
+  <!-- <%= link "Login", to: "", class: "btn btn-primary btn-lg", id: "login"%>-->
 </div>
 
 <div class="row marketing">
