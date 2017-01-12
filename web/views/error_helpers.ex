@@ -4,6 +4,7 @@ defmodule Faster.ErrorHelpers do
   """
 
   use Phoenix.HTML
+  import String
 
   @doc """
   Generates tag for inlined form input errors.
@@ -32,9 +33,9 @@ defmodule Faster.ErrorHelpers do
     #     dgettext "errors", "is invalid"
     #
     if count = opts[:count] do
-      Gettext.dngettext(Faster.Gettext, "errors", msg, msg, count, opts)
+      Gettext.dngettext(Faster.Gettext, "errors", capitalize(msg), capitalize(msg), count, opts)
     else
-      Gettext.dgettext(Faster.Gettext, "errors", msg, opts)
+      Gettext.dgettext(Faster.Gettext, "errors", capitalize(msg), opts)
     end
   end
 end

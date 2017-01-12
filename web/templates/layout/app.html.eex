@@ -13,19 +13,14 @@
 
   <body>
     <div class="container">
-      <header class="header">
-        <nav role="navigation">
-          <ul class="nav nav-pills pull-right">
-            <li><%= link "Register", to: authentication_path(@conn, :new) %></li>
-          </ul>
-        </nav>
-        <%= link "", to: page_path(@conn, :index), class: "logo" %>
+      <header class="header row">        
+        <%= link "", to: page_path(@conn, :index), class: "logo col-lg-8 col-lg-offset-2" %>
       </header>
 
       <p class="alert alert-info" role="alert"><%= get_flash(@conn, :info) %></p>
       <p class="alert alert-danger" role="alert"><%= get_flash(@conn, :error) %></p>
 
-      <main role="main">
+      <main role="main row">
         <%= render @view_module, @view_template, assigns %>
       </main>
 
