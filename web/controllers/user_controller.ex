@@ -20,6 +20,6 @@ defmodule Faster.UserController do
              conn
              |> put_flash(:warning, "Unable to create account")
              |> render("new.html", changeset: changeset)    
-         end
+      end
   end
 end

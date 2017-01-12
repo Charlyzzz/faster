@@ -1,7 +1,7 @@
 <div class="jumbotron row col-lg-10 col-lg-offset-1" id="jumbotron">
   <h2><%= gettext "Welcome to %{name}", name: "Faster!" %></h2>
   <p class="lead">A blazing-fast chat client made with Phoenix<br/>Log in to start chatting right away.</p><br/>
-  <%= link "Sign in", to: "", class: "btn btn-primary btn-lg", id: "login"%>
+  <%= link "Sign in", to: session_path(@conn, :new), class: "btn btn-primary btn-lg", id: "login"%>
   <%= link "Sign up", to: user_path(@conn, :new), class: "btn btn-success btn-lg col-lg-offset-1", id: "login"%>
 </div>
 <!---
