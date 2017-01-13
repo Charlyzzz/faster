@@ -33,6 +33,8 @@ defmodule Faster.User do
 
   def authenticate(login) do    
     login
+    |> Map.split(["username", "password"]) 
+    |> elem(0)
     |> Map.put("password", hashed_password(login["password"]))
     |> Enum.to_list
     |> Enum.map(fn {key, value} -> {String.to_atom(key), value} end)

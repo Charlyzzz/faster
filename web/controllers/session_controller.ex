@@ -7,21 +7,21 @@ defmodule Faster.SessionController do
   end
 
   def create(conn, %{"login" => login_params}) do
-    login_data = 
-        Map.split(login_params, ["username", "password"]) 
-        |> elem(0)
+    login_params
+    |> User.authenticate
+    |> login(conn)
+  end
 
-    case User.authenticate(login_data) do
-         nil -> 
-            conn
-            |> put_flash(:info, "Wrong email or password")
-            |> redirect(to: session_path(conn, :create)) 
+  defp login(nil, conn) do
+    conn
+    |> put_flash(:info, "Wrong email or password")
+    |> redirect(to: session_path(conn, :create)) 
+  end
 
-        user -> 
-            conn
-            |> put_session(:current_user, user.id)
-            |> put_flash(:info, "Logged in!")
-            |> redirect(to: "/")          
-    end
+  defp login(user, conn) do
+    conn
+      |> put_session(:current_user, user.id)
+      |> put_flash(:info, "Logged in!")
+      |> redirect(to: "/")
   end  
 end
