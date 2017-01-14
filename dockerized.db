@@ -1,1 +1,1 @@
-docker run --name faster_postgres -e POSTGRES_USER=faster -e POSTGRES_PASSWORD=fasterz --volumes-from faster_db -d -p 5432:5432 postgres
+docker run --name faster_postgres -e POSTGRES_USER=faster -e POSTGRES_PASSWORD=fasterz --volumes-from faster_db_volume -d -p 5432:5432 postgres
