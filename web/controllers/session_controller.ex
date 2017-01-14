@@ -21,7 +21,7 @@ defmodule Faster.SessionController do
 
   defp login(nil, conn) do
     conn
-    |> put_flash(:info, "Wrong email or password")
+    |> put_flash(:info, "Wrong username or password")
     |> redirect(to: session_path(conn, :create)) 
   end
 

@@ -12,8 +12,9 @@ defmodule Faster.UserController do
       |> User.hash_password()
       |> Repo.insert()
       |> case do
-           {:ok, _} ->
+           {:ok, user} ->
              conn
+             |> put_session(:current_user, user.id)
              |> put_flash(:info, "Your account was created!")
              |> redirect(to: "/")
            {:error, changeset} ->
