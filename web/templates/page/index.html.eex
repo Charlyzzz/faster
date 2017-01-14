@@ -1,6 +1,6 @@
 <div class="jumbotron row col-lg-10 col-lg-offset-1" id="jumbotron">  
   <%= if logged_in?(@conn) do %>
-    <h2><%= gettext "You are logged in as  %{name}", name: current_user(@conn).username %></h2><br/>
+    <h2><%= gettext "You are logged in as %{name}", name: @user.username %></h2><br/>
     <%= button "Log out!", to: session_path(@conn, :delete), method: :delete, class: "btn btn-danger btn-lg" %>
   <% else %>    
     <h2><%= gettext "Welcome to %{name}", name: "Faster!" %></h2>
