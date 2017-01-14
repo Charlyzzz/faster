@@ -1,0 +1,4 @@
+<h2><%= gettext "Welcome to %{name}", name: "Faster!" %></h2>
+<p class="lead">A blazing-fast chat client made with Phoenix<br/>Log in to start chatting right away.</p><br/>
+<%= link "Sign in", to: session_path(@conn, :new), method: :get, class: "btn btn-primary btn-lg" %>
+<%= link "Sign up", to: user_path(@conn, :new), method: :get, class: "btn btn-success btn-lg col-lg-offset-1" %>

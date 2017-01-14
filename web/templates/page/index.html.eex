@@ -1,12 +1,8 @@
 <div class="jumbotron row col-lg-10 col-lg-offset-1" id="jumbotron">  
   <%= if logged_in?(@conn) do %>
-    <h2><%= gettext "You are logged in as %{name}", name: @user.username %></h2><br/>
-    <%= button "Log out!", to: session_path(@conn, :delete), method: :delete, class: "btn btn-danger btn-lg" %>
-  <% else %>    
-    <h2><%= gettext "Welcome to %{name}", name: "Faster!" %></h2>
-    <p class="lead">A blazing-fast chat client made with Phoenix<br/>Log in to start chatting right away.</p><br/>
-    <%= link "Sign in", to: session_path(@conn, :new), method: :get, class: "btn btn-primary btn-lg" %>
-    <%= link "Sign up", to: user_path(@conn, :new), method: :get, class: "btn btn-success btn-lg col-lg-offset-1" %>
+    <%= render "logged.html", assigns %>
+  <% else %>
+    <%= render "not_logged.html", assigns %>        
   <% end %>
 </div>
 <!---
