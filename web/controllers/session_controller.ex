@@ -12,6 +12,13 @@ defmodule Faster.SessionController do
     |> login(conn)
   end
 
+  def delete(conn, _params) do
+    conn
+      |> delete_session(:current_user)
+      |> put_flash(:info, "Logged out")
+      |> redirect(to: "/")
+  end
+
   defp login(nil, conn) do
     conn
     |> put_flash(:info, "Wrong email or password")

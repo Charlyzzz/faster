@@ -14,7 +14,7 @@
   <body>
     <div class="container">
       <header class="header row">        
-        <%= link "", to: page_path(@conn, :index), class: "logo col-lg-8 col-lg-offset-2" %>
+        <%= link "", to: page_path(@conn, :index), class: "logo col-lg-8 col-lg-offset-2" %>            
       </header>
 
       <p class="alert alert-info" role="alert"><%= get_flash(@conn, :info) %></p>

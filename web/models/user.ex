@@ -27,8 +27,7 @@ defmodule Faster.User do
   
   def hash_password(changeset) do    
     password = changeset.params["password"]
-    put_change(changeset, :password, hashed_password(password))
-    
+    put_change(changeset, :password, hashed_password(password))    
   end
 
   def authenticate(login) do    
