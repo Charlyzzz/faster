@@ -13,7 +13,7 @@ channel.join()
     .receive("error", resp => { console.log("Unable to join", resp) })
 
 channel.on("new_message", (payload) => {
-    let line = newLine(payload.username, payload.content)
+    let line = newLine(payload.user, payload.content)
     $messages.append(line)
 })
 
@@ -37,7 +37,7 @@ let chatboxContent = function () {
 }
 
 let pushMessage = function (username, text) {
-    channel.push('new_message', { username: username, content: text })
+    channel.push('new_message', { user: username, content: text })
 }
 
 let messageReceived = function (payload) {
