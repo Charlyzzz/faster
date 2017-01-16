@@ -1,5 +1,6 @@
 defmodule Faster.Message do
   use Faster.Web, :model
+  alias Faster.{Message, Repo}
 
   schema "messages" do
     field :content, :string
@@ -17,4 +18,13 @@ defmodule Faster.Message do
     |> validate_required([:content, :user])
     |> validate_length(:content, min: 1)
   end
+
+  def create(payload_params) do
+    changeset(%Message{}, payload_params)
+    |> Repo.insert!
+  end
+
+  def all do
+    Repo.all(Message)
+  end  
 end

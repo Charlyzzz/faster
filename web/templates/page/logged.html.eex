@@ -1,7 +1,11 @@
 <div class="jumbotron"> 
     <h2><%= gettext "You are logged in as %{name}", name: @user.username %></h2><hr><br>
 
-    <div id="messages"></div>
+    <div id="messages">
+        <%= for message <- all() do %>
+            <%= render "message.html", message: message %>
+        <% end %>
+    </div>
 
     <div class="row form-group">
         <%= text_input :chat, :content, class: "form-control", id: "chatbox", placeholder: "Enter your message here!" %>      
