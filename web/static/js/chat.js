@@ -45,7 +45,7 @@ let messageReceived = function (payload) {
 }
 
 let newLine = function (username, text) {
-    return `<div><msg><b>${username}:</b> <i>${text}</i> </msg></div>`
+    return `<div><b>${username}:</b> <i>${text}</i></div>`
 }
 
 export let Chat = {
