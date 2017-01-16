@@ -3,7 +3,7 @@ defmodule Faster.UserSocket do
 
   ## Channels
   # channel "room:*", Faster.RoomChannel
-
+  channel "lobby", Faster.ChatChannel
   ## Transports
   transport :websocket, Phoenix.Transports.WebSocket
   # transport :longpoll, Phoenix.Transports.LongPoll
