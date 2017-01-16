@@ -17,10 +17,14 @@ defmodule Faster.Router do
     pipe_through :browser # Use the default browser stack
 
     get "/", PageController, :index
+
     resources "/users", UserController, only: [:new, :create]
+
     get "/login", SessionController, :new     
     post "/login", SessionController, :create
     delete "/logout", SessionController, :delete
+
+    post "/send", MessageController, :create
   end
 
   # Other scopes may use custom stacks.
