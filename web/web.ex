@@ -45,7 +45,7 @@ defmodule Faster.Web do
 
       # Import convenience functions from controllers
       import Phoenix.Controller, only: [get_csrf_token: 0, get_flash: 2, view_module: 1]
-      import Faster.Session, only: [logged_in?: 1, current_user: 1]
+      #import Faster.Session, only: [logged_in?: 1, current_user: 1]
 
       # Use all HTML functionality (forms, tags, etc)
       use Phoenix.HTML
@@ -53,6 +53,7 @@ defmodule Faster.Web do
       import Faster.Router.Helpers
       import Faster.ErrorHelpers
       import Faster.Gettext
+      import Faster.JSHelpers
     end
   end
 

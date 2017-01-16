@@ -19,3 +19,11 @@ import "phoenix_html"
 // paths "./socket" or full ones "web/static/js/socket".
 
 // import socket from "./socket"
+
+import { Chat } from "web/static/js/chat"
+
+export var App = {
+  chat: function(){
+    Chat.run()
+  }
+}
