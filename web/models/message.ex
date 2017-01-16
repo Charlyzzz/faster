@@ -25,6 +25,8 @@ defmodule Faster.Message do
   end
 
   def all do
-    Repo.all(Message)
+    Message 
+    |> order_by(:inserted_at) 
+    |> Repo.all
   end  
 end
