@@ -1,11 +1,15 @@
-<h2><%= gettext "You are logged in as %{name}", name: @user.username %></h2><hr><br>
+<div class="jumbotron"> 
+    <h2><%= gettext "You are logged in as %{name}", name: @user.username %></h2><hr><br>
 
-<div id="messages" class="row"></div>
+    <div id="messages"></div>
 
-<%= form_for @conn, message_path(@conn, :create), [as: :message], fn f -> %>
-    <div class="row form-group">                  
-        <%= text_input f, :content, class: "form-control", placeholder: "Enter your message here!" %>      
+    <div class="row form-group">
+        <%= text_input :chat, :content, class: "form-control", id: "chatbox", placeholder: "Enter your message here!" %>      
     </div>
-<% end %>
 
-<%= button "Log out!", to: session_path(@conn, :delete), method: :delete, class: "row btn btn-danger btn-lg" %>
+    <%= button "Log out!", to: session_path(@conn, :delete), method: :delete, class: "row btn btn-danger btn-lg" %>
+</div>
+
+<%= teleport(username: @user.username)%>
+
+<script>require("web/static/js/app").App.chat()</script>
