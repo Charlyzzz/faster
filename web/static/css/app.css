@@ -1,1 +1,10 @@
 /* This file is for your main application css. */
+
+#messages {
+  height: 300px;
+  padding: 10px;
+  overflow: auto;
+  margin-bottom: 50px;
+  background:  #fff;
+  border-radius: 25px;
+}

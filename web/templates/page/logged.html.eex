@@ -1,2 +1,11 @@
-<h2><%= gettext "You are logged in as %{name}", name: @user.username %></h2><br/>
-<%= button "Log out!", to: session_path(@conn, :delete), method: :delete, class: "btn btn-danger btn-lg" %>
+<h2><%= gettext "You are logged in as %{name}", name: @user.username %></h2><hr><br>
+
+<div id="messages" class="row"></div>
+
+<%= form_for @conn, message_path(@conn, :create), [as: :message], fn f -> %>
+    <div class="row form-group">                  
+        <%= text_input f, :content, class: "form-control", placeholder: "Enter your message here!" %>      
+    </div>
+<% end %>
+
+<%= button "Log out!", to: session_path(@conn, :delete), method: :delete, class: "row btn btn-danger btn-lg" %>
