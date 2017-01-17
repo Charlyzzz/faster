@@ -28,7 +28,8 @@ class Chat {
         })
 
         this.channel.on("join", (payload) => {
-            this.render(Chat.joinedTemplate, [payload.user])
+            let user = (payload.user == Chat.username)? "You": payload.user
+            this.render(Chat.joinedTemplate, [user])
         })
     }
 
