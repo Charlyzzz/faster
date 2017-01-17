@@ -2,7 +2,16 @@ defmodule Faster.ChatChannel do
   use Faster.Web, :channel
   alias Faster.Message
 
-  def join("lobby", _payload, socket), do: {:ok, socket}
+  def join("lobby", payload, socket) do
+     send self(), {:after_join, payload}
+     {:ok, socket}
+  end
+
+   def handle_info({:after_join, payload}, socket) do
+    broadcast! socket, "join", payload    
+    {:noreply, socket}
+  end
+  
 
   # Channels can be used in a request/response fashion
   # by sending replies to requests from the client

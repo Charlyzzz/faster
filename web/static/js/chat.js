@@ -3,73 +3,59 @@ import socket from "./socket"
 
 const ENTER_KEY = 13
 
-let channel = socket.channel("lobby", {})
+class Chat {
 
-let $messages
-let $chatbox
-
-channel.join()
-    .receive("ok", resp => { console.log("Joined successfully", resp) })
-    .receive("error", resp => { console.log("Unable to join", resp) })
-
-channel.on("new_message", (payload) => {
-    let line = newLine(payload.user, payload.content)
-    $messages.append(line)
-    scrollDown()
-})
-
-let registerChatboxAction = function () {
-    $chatbox.keypress(function (event) {
-        let username = $("#from_phoenix").attr("username")
-        let pressedKey = event.which
-        if (pressedKey == ENTER_KEY && chatboxContent() !== "") {
-            pushMessage(username, chatboxContent())
-            scrollDown()
-            clearChatbox()
-        }
-    })
-}
-
-let clearChatbox = function () {
-    $chatbox.val("")
-}
-
-let chatboxContent = function () {
-    return $chatbox.val()
-}
-
-let pushMessage = function (username, text) {
-    channel.push('new_message', { user: username, content: text })
-}
-
-let scrollDown = function () {
-    $messages.stop().animate(
-        {
-            scrollTop: $messages[0].scrollHeight
-        }, 800);
-}
-
-let messageReceived = function (payload) {
-    $messages.append(payload.content)
-}
-
-let newLine = function (username, text) {
-    return `<div><b>${sanitizeHtml(username)}:</b> <i>${sanitizeHtml(text)}</i></div>`
-}
-
-let sanitizeHtml = function (text) {
-    return text
-        .replace(/&/g, '&amp;')
-        .replace(/</g, '&lt;')
-        .replace(/>/g, '&gt;')
-}
-export let Chat = {
-    run: function () {
-        $(window).on('load', function () {
-            $messages = $("#messages")
-            $chatbox = $("#chatbox")
-            registerChatboxAction()
-            $messages.scrollTop($messages.prop("scrollHeight"))
+    static init() {
+        this.messages = $("#messages")
+        this.chatbox = $("#chatbox")
+        this.username = $("#from_phoenix").attr("username")
+        this.setupChannel()
+        this.chatbox.keypress(function (event) {
+            let pressedKey = event.which
+            if (pressedKey == ENTER_KEY && Class.chatboxContent() !== "") {
+                Chat.channel.push('new_message', { user: Chat.username, content: Class.chatboxContent() })
+                Chat.chatbox.val("")
+            }
         })
     }
+
+    static setupChannel() {
+        this.channel = socket.channel("lobby", { user: Chat.username })
+        this.channel.join()
+
+        this.channel.on("new_message", (payload) => {
+            this.render(Chat.messageTemplate, [payload.user, payload.content])
+        })
+
+        this.channel.on("join", (payload) => {
+            this.render(Chat.joinedTemplate, [payload.user])
+        })
+    }
+
+    static chatboxContent() { return this.chatbox.val() }
+
+    static sanitize(html) { return $("<div/>").text(html).html() }
+
+    static scrollDown() {
+        this.messages.stop().animate(
+            {
+                scrollTop: this.messages[0].scrollHeight
+            }, 800);
+    }
+
+    static render(template, params) {
+        let safe_params = params.map(this.sanitize)
+        template.apply(Chat, safe_params)
+        Chat.scrollDown()
+    }
+
+    static messageTemplate(user, message) {
+        this.messages.append(`<div><font><b>${user}:</b> <i>${message}</i></font></div>`)
+    }
+
+    static joinedTemplate(user) {
+        this.messages.append(`<div><font color="grey">${user} joined the room</font></div>`)
+    }
 }
+
+export default Chat

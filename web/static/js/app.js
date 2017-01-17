@@ -20,10 +20,10 @@ import "phoenix_html"
 
 // import socket from "./socket"
 
-import { Chat } from "web/static/js/chat"
+import Chat from "web/static/js/chat"
 
 export var App = {
   chat: function(){
-    Chat.run()
+    Chat.init()
   }
 }
