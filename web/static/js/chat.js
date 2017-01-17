@@ -12,8 +12,8 @@ class Chat {
         this.setupChannel()
         this.chatbox.keypress(function (event) {
             let pressedKey = event.which
-            if (pressedKey == ENTER_KEY && Class.chatboxContent() !== "") {
-                Chat.channel.push('new_message', { user: Chat.username, content: Class.chatboxContent() })
+            if (pressedKey == ENTER_KEY && Chat.chatboxContent() !== "") {
+                Chat.channel.push('new_message', { user: Chat.username, content: Chat.chatboxContent() })
                 Chat.chatbox.val("")
             }
         })
@@ -50,11 +50,11 @@ class Chat {
     }
 
     static messageTemplate(user, message) {
-        this.messages.append(`<div><font><b>${user}:</b> <i>${message}</i></font></div>`)
+        this.messages.append(`<div><font><b>${user}: </b><i>${message}</i></font></div>`)
     }
 
     static joinedTemplate(user) {
-        this.messages.append(`<div><font color="grey">${user} joined the room</font></div>`)
+        this.messages.append(`<div><font color="grey"><b>${user}</b> joined the room</font></div>`)
     }
 }
 
