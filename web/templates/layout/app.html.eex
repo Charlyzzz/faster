@@ -16,7 +16,7 @@
     <div class="container">
       <div class="header row">        
         <div>
-          <%= link "", to: page_path(@conn, :index), class: "logo col-lg-7 col-lg-offset-2" %>            
+          <%= link "", to: page_path(@conn, :index), class: "logo col-sm-7 col-sm-offset-2 col-xs-7 col-xs-offset-2" %>            
         </div>
       </div>
 
